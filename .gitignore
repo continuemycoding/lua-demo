@@ -1,3 +1,5 @@
 .cursor/
 .DS_Store
 examples/memo-reminder/lua
+examples/memo-reminder/lua_modules/
+examples/memo-reminder/.luarocks/
