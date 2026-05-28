@@ -28,4 +28,28 @@ package.path = table.concat({
 }, ";")
 package.cpath = luarocks_cpath .. ";" .. package.cpath
 
+local function ensure_deps()
+  local marker = luarocks_root .. "/share/lua/" .. lua_version .. "/socket/http.lua"
+  local f = io.open(marker, "r")
+  if f then
+    f:close()
+    return
+  end
+
+  io.stderr:write(table.concat({
+    "[memo-reminder] 缺少依赖 LuaSocket（未找到 " .. marker .. "）。",
+    "",
+    "首次运行请先安装依赖：",
+    "  cd examples/memo-reminder",
+    "  make deps",
+    "",
+    "或直接：",
+    "  make run",
+    "",
+  }, "\n"))
+  os.exit(1)
+end
+
+ensure_deps()
+
 return root
